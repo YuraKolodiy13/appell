@@ -85,6 +85,7 @@ body{
     width: 30px;
     position: absolute;
     right: 20px;
+    top: 10px;
 }
 .nav__btn span::after,
 .nav__btn span::before{
@@ -105,12 +106,8 @@ body{
 .header__btn{
     width: 180px;
     height: 60px;
-    border: 1px solid #ffc900;
-    background-color: #ffc900;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    box-sizing: border-box;
+    position: relative;
+    z-index: 10;
 }
 .header__btn a{
     color: #000000;
@@ -119,6 +116,37 @@ body{
     text-transform: uppercase;
     font-weight: 500;
     letter-spacing: 2px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    background-color: #ffc900;
+    position: relative;
+    z-index: 10;
+    transition: .5s;
+    border: 1px solid #ffc900;
+    box-sizing: border-box;
+}
+.header__btn::after{
+    content: '';
+    width: 110px;
+    height: 110px;
+    background: url("img/header-btn-hover.png") no-repeat;
+    position: absolute;
+    right: -1000%;
+    top: -150px;
+    background-size: contain;
+    transition: .5s;
+}
+.header__btn:hover a{
+    background-color: #000;
+    color: #ffffff;
+    border-color: #000;
+}
+.header__btn:hover::after{
+    right: 20px;
+    top: 20px;
 }
 
 main{
@@ -138,19 +166,25 @@ main{
 }
 .slider__title{
     position: absolute;
-    top: 50px;
-    left: 50px;
+    top: 100px;
+    left: 120px;
     right: 50px;
     color: #ffffff;
     z-index: 10;
 }
-.slider__title span{
-    display: block;
+.slider__title p{
     position: relative;
     padding-left: 60px;
     box-sizing: border-box;
+    font-size: 16px;
+    text-transform: uppercase;
+    margin: 0;
+    letter-spacing: 2px;
 }
-.slider__title span::before{
+.slider__title span{
+    font-weight: bold;
+}
+.slider__title p::before{
     content: '';
     position: absolute;
     left: 0;
@@ -163,7 +197,7 @@ main{
 .slider__text{
     position: absolute;
     top: 150px;
-    left: 50px;
+    left: 120px;
     right: 100px;
     z-index: 10;
     color: #ffffff;
@@ -178,6 +212,8 @@ main{
     position: absolute;
     bottom: 100px;
     right: 120px;
+    height: 60px;
+    overflow: hidden;
 }
 .slider .slick-arrow{
     height: 60px;
@@ -188,6 +224,7 @@ main{
     padding: 0;
     border: none;
     transition: .5s;
+    box-sizing: border-box;
 }
 .slider .slick-arrow:hover{
     background-color: #fff;
@@ -208,6 +245,7 @@ main{
     top: 25px;
     background-color: #fff;
     transform: rotate(-45deg);
+    z-index: 10;
 }
 .slider .slick-prev-img::before{
     top: 33px;
@@ -223,18 +261,27 @@ main{
 .slider .slick-arrow:focus{
     outline: none;
 }
-.slider .slick-arrow::after,
-.slider .slick-arrow::before,
-.slider .slick-arrow::before,
-.slider .slick-arrow::after{
-    background-color: #fff;
-}
-.slider .slick-arrow:hover::after,
-.slider .slick-arrow:hover::before,
-.slider .slick-arrow:hover::before,
-.slider .slick-arrow:hover::after{
+.slider .slick-prev-img:hover::after,
+.slider .slick-prev-img:hover::before,
+.slider .slick-next-img:hover::before,
+.slider .slick-next-img:hover::after{
     background-color: #000;
 }
+
+.slider__item{
+    position: relative;
+}
+.slider__overlay{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 640px;
+    height: 355px;
+    background: url("img/overlay.png") no-repeat;
+    background-size: contain;
+    z-index: 20;
+}
+
 .appell__btn{
     position: absolute;
     bottom: 100px;
@@ -254,6 +301,7 @@ main{
     font-weight: 500;
     letter-spacing: 2px;
     transition: .3s;
+    box-sizing: border-box;
 }
 .appell__learn{
     background-color: #00c0ef;
@@ -452,6 +500,7 @@ main{
     margin-bottom: 24px;
     position: relative;
     padding-left: 60px;
+    letter-spacing: 2px;
 }
 .title span{
     font-weight: bold;
@@ -577,20 +626,20 @@ main{
         -o-transition: .5s;
         transition: .5s;
         width: 200px;
-        top: 27px;
-    }
-    .nav__btn.open span{
-        background-color: rgba(255, 255, 255, 0);
+        top: 37px;
+        font-size: 12px;
+        color: #ffc900;
+        font-weight: 500;
+        letter-spacing: 1px;
+        text-transform: uppercase;
     }
     .nav__btn.open span::before{
-        left: 50%;
         top: 0;
         -webkit-transform: rotate(45deg);
         -ms-transform: rotate(45deg);
         transform: rotate(45deg);
     }
     .nav__btn.open span::after{
-        left: 50%;
         top: 0;
         -webkit-transform: rotate(-45deg);
         -ms-transform: rotate(-45deg);
@@ -621,29 +670,55 @@ main{
     .nav:hover{
         background-color: #000;
     }
+    .nav:hover .nav__btn span::after,
+    .nav:hover .nav__btn span::before,
+    .nav:hover .nav__btn span{
+        background-color: #ffc900;
+    }
+    .nav .nav__btn.open span{
+        background-color: rgba(255, 255, 255, 0);
+    }
+    .nav ul{
+        display: none;
+    }
     .nav ul.visible{
+        display: block;
         -webkit-transform: translate(0, 65px);
         -ms-transform: translate(0, 65px);
         transform: translate(0, 65px);
         opacity: 1;
-        top: -65px;
-        background-color: rgba(255, 255, 255, .9);
-        -webkit-box-shadow: 0 2px 15px #000;
-        box-shadow: 0 2px 15px #000;
+        top: 34px;
+        background-color: #fff;
+        padding: 30px 0;
     }
     .nav{
         order: 2;
     }
     .open {
         margin: 0;
-        width: 50px;
-        height: 40px;
-        border-radius: 60px;
     }
 
     .header__logo,
     .header__btn,
     .nav{
         width: 40%;
+    }
+    .nav:hover{
+        background-color: #000;
+        color: #ffffff;
+    }
+
+    .slider .slick-prev-img::after,
+    .slider .slick-next-img::after{
+        left: 17px;
+        top: 20px;
+    }
+    .slider .slick-prev-img::before,
+    .slider .slick-next-img::before{
+        left: 17px;
+        top: 29px;
+    }
+    .slider__btn{
+        height: 50px;
     }
 }
